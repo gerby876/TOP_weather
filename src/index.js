@@ -1,7 +1,3 @@
-//key XQCVRZLS6VS9ZR2P644NHNLQH
-
-//https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=11111111111111111
-
 const input = function () {
   const city = document.querySelector(".city");
   const date = document.querySelectorAll(".day");
