@@ -5,6 +5,14 @@
 const input = function () {
   const city = document.querySelector(".city");
   const date = document.querySelectorAll(".day");
+  const outputdate = document.querySelector(".date");
+  const outputconditions = document.querySelector(".conditions");
+  const outputfeels = document.querySelector(".feelslike");
+  const outputtemp = document.querySelector(".temp");
+  const outputtempmax = document.querySelector(".tempmax");
+  const outputtempmin = document.querySelector(".tempmin");
+  const outputdescription = document.querySelector(".description");
+
   for (let x = 0; x < date.length; x++) {
     if (date[x].checked) {
       datecheck = date[x].id;
@@ -20,21 +28,21 @@ const input = function () {
     })
     .then(function (response) {
       if (datecheck == "today") {
-        console.log(response.days[0].datetime);
-        console.log(response.days[0].conditions);
-        console.log(response.days[0].feelslike);
-        console.log(response.days[0].temp);
-        console.log(response.days[0].tempmax);
-        console.log(response.days[0].tempmin);
-        console.log(response.days[0].description);
+        outputdate.textContent = `Weather for ${response.days[0].datetime}.`;
+        outputconditions.textContent = `Conditions for the day are ${response.days[0].conditions}.`;
+        outputfeels.textContent = `The temperature feels like ${response.days[0].feelslike}.`;
+        outputtemp.textContent = `The temperature for the day is ${response.days[0].temp}.`;
+        outputtempmax.textContent = `The max temperature for the day is ${response.days[0].tempmax}.`;
+        outputtempmin.textContent = `The min temperature for the day is ${response.days[0].tempmin}.`;
+        outputdescription.textContent = response.days[0].description;
       } else if (datecheck == "tomorrow") {
-        console.log(response.days[1].datetime);
-        console.log(response.days[1].conditions);
-        console.log(response.days[1].feelslike);
-        console.log(response.days[1].temp);
-        console.log(response.days[1].tempmax);
-        console.log(response.days[1].tempmin);
-        console.log(response.days[1].description);
+        outputdate.textContent = `Weather for ${response.days[1].datetime}.`;
+        outputconditions.textContent = `Conditions for the day are ${response.days[1].conditions}.`;
+        outputfeels.textContent = `The temperature feels like ${response.days[1].feelslike}.`;
+        outputtemp.textContent = `The temperature for the day is ${response.days[1].temp}.`;
+        outputtempmax.textContent = `The max temperature for the day is ${response.days[1].tempmax}.`;
+        outputtempmin.textContent = `The min temperature for the day is ${response.days[1].tempmin}.`;
+        outputdescription.textContent = response.days[1].description;
       }
     });
   city.value = "";
