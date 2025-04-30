@@ -3,6 +3,18 @@ import "./styles.css";
 const input = function () {
   const city = document.querySelector(".city");
   const container = document.querySelector(".container");
+  const dayName = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  for (let x = container.childNodes.length; x > 0; x--) {
+    container.firstChild.remove();
+  }
 
   fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city.value}?unitGroup=us&include=days&key=XQCVRZLS6VS9ZR2P644NHNLQH&contentType=json`,
@@ -19,9 +31,15 @@ const input = function () {
         day.classList.add("day");
         container.appendChild(day);
 
-        const outputdate = document.createElement("div");
+        const weekday = new Date(response.days[x].datetime);
+        const outputday = document.createElement("h2");
+        outputday.classList.add("date");
+        outputday.textContent = dayName[weekday.getDay()];
+        day.appendChild(outputday);
+
+        const outputdate = document.createElement("h3");
         outputdate.classList.add("date");
-        outputdate.textContent = `Weather for ${response.days[x].datetime}.`;
+        outputdate.textContent = `${response.days[x].datetime}`;
         day.appendChild(outputdate);
 
         const outputconditions = document.createElement("div");
@@ -31,7 +49,7 @@ const input = function () {
 
         const outputfeels = document.createElement("div");
         outputfeels.classList.add("feelslike");
-        outputfeels.textContent = `Conditions for the day are ${response.days[x].feelslike}.`;
+        outputfeels.textContent = `The temperature feels like ${response.days[x].feelslike}.`;
         day.appendChild(outputfeels);
 
         const outputtemp = document.createElement("div");
@@ -48,6 +66,21 @@ const input = function () {
         outputtempmin.classList.add(".tempmin");
         outputtempmin.textContent = `The min temperature for the day is ${response.days[x].tempmin}.`;
         day.appendChild(outputtempmin);
+
+        const outputdew = document.createElement("div");
+        outputdew.classList.add(".dew");
+        outputdew.textContent = `The dew point for today is ${response.days[x].dew}.`;
+        day.appendChild(outputdew);
+
+        const outputhumidity = document.createElement("div");
+        outputhumidity.classList.add(".humidity");
+        outputhumidity.textContent = `The humidity for today is ${response.days[x].humidity}.`;
+        day.appendChild(outputhumidity);
+
+        const outputwindspeed = document.createElement("div");
+        outputwindspeed.classList.add(".windspeed");
+        outputwindspeed.textContent = `The wind speed for today is ${response.days[x].windspeed}.`;
+        day.appendChild(outputwindspeed);
 
         const outputdescription = document.createElement("div");
         outputdescription.classList.add(".description");
