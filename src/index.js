@@ -12,21 +12,26 @@ const input = function () {
     "Friday",
     "Saturday",
   ];
-  for (let x = container.childNodes.length; x > 0; x--) {
-    container.firstChild.remove();
-  }
+  const cityName = city.value;
+  city.value = "";
+  return [dayName, cityName];
+};
 
+const weatherData = function (dayName, cityName) {
+  const container = document.querySelector(".container");
   fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city.value}?unitGroup=us&include=days&key=XQCVRZLS6VS9ZR2P644NHNLQH&contentType=json`,
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=us&include=days&key=XQCVRZLS6VS9ZR2P644NHNLQH&contentType=json`,
     { mode: "cors" }
   )
     .then(function (response) {
       return response.json();
     })
     .then(function (response) {
-      for (let x = 0; x < 7; x++) {
-        console.log(response.days[x]);
+      for (let x = container.childNodes.length; x > 0; x--) {
+        container.firstChild.remove();
+      }
 
+      for (let x = 0; x < 7; x++) {
         const day = document.createElement("div");
         day.classList.add("day");
         container.appendChild(day);
@@ -87,10 +92,25 @@ const input = function () {
         outputdescription.textContent = response.days[x].description;
         day.appendChild(outputdescription);
       }
+    })
+    .catch(function (err) {
+      if (err.message.includes("Unexpected token 'B'")) {
+        alert(
+          "Unable to find the location entered.  Please check the spelling or try a different location"
+        );
+      } else {
+        alert(
+          "An unexpected error has occured.  Please wait a few minutes and try again.  If errors persist to many requests may have been made.  Wait a day to try again."
+        );
+      }
     });
-  city.value = "";
+};
+
+const findWeather = function () {
+  const result = input();
+  weatherData(result[0], result[1]);
 };
 
 const button = document.querySelector("button");
 
-button.addEventListener("click", input);
+button.addEventListener("click", findWeather);
