@@ -43,7 +43,7 @@ const weatherData = function (dayName, cityName) {
         const weekday = new Date(response.days[x].datetime);
         const outputday = document.createElement("h2");
         outputday.classList.add("date");
-        outputday.textContent = dayName[weekday.getDay()];
+        outputday.textContent = dayName[weekday.getUTCDay()];
         day.appendChild(outputday);
 
         const outputdate = document.createElement("h3");
