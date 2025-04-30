@@ -27,6 +27,10 @@ const weatherData = function (dayName, cityName) {
       return response.json();
     })
     .then(function (response) {
+      const cityTitle = document.querySelector(".cityname");
+      const city = cityName.toLowerCase();
+      cityTitle.textContent = city.charAt(0).toUpperCase() + city.slice(1);
+
       for (let x = container.childNodes.length; x > 0; x--) {
         container.firstChild.remove();
       }
