@@ -1,0 +1,45 @@
+body {
+  margin: 0px;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 10fr;
+  background-image: linear-gradient(to bottom, #769eca, #274567);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.city {
+  height: 40%;
+  width: 20em;
+  font-size: 2em;
+  border-radius: 16px;
+  margin-right: 1em;
+}
+
+button {
+  height: 40%;
+  width: 5em;
+  font-size: 2em;
+  border-radius: 16px;
+  padding: 0px;
+  padding-bottom: 1em;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.day {
+  border: solid;
+  border-width: 0.25em;
+  margin-left: 1em;
+  margin-right: 1em;
+  background-color: #90b0d4;
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
